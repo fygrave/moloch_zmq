@@ -15,7 +15,7 @@ all:tagger.so netflow.so zmqexp.so
 
 zmqexp.so: zmqexp.c ../moloch.h
 	$(CC) -O2 -ggdb -Wall -Wextra -D_GNU_SOURCE -fPIC -c zmqexp.c $(INCLUDE_PCAP) $(INCLUDE_OTHER)
-	$(CC) -shared -o zmqexp.so zmqexp.o
+	$(CC) -shared -o zmqexp.so zmqexp.o -lzmq
 
 tagger.so:tagger.c ../moloch.h
 	$(CC) -O2 -ggdb -Wall -Wextra -D_GNU_SOURCE -fPIC -c tagger.c $(INCLUDE_PCAP) $(INCLUDE_OTHER)
