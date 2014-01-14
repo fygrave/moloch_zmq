@@ -13,6 +13,11 @@ extended to hook into other protocols as well.
 
 Only two 0MQ patterns are supported on the moment. Push/Pull and Pub/Sub. 
 
+
+Requirements:
+============
+0MQ 3.x or later
+
 Installation:
 =============
 
