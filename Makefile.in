@@ -11,7 +11,7 @@ INSTALL = @INSTALL@
 PLUGINDIR = @prefix@/plugins
 
 
-all:tagger.so netflow.so zmqexport.so
+all:tagger.so netflow.so zmqexp.so
 
 zmqexp.so:  zmqexp.c ../moloch.h
 	$(CC) -O2 -ggdb -Wall -Wextra -D_GNU_SOURCE -fPIC -c zmqexp.c $(INCLUDE_PCAP) $(INCLUDE_OTHER)
