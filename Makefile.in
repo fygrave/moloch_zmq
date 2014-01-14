@@ -1,0 +1,33 @@
+CC            = @CC@
+
+INCLUDE_PCAP  = @PCAP_CFLAGS@
+
+INCLUDE_OTHER = -I.. -I../thirdparty \
+                @GLIB2_CFLAGS@ \
+	        @NIDS_CFLAGS@
+
+mkdir_p = @mkdir_p@
+INSTALL = @INSTALL@
+PLUGINDIR = @prefix@/plugins
+
+
+all:tagger.so netflow.so zmqexport.so
+
+zmqexp.so:  zmqexp.c ../moloch.h
+	$(CC) -O2 -ggdb -Wall -Wextra -D_GNU_SOURCE -fPIC -c zmqexp.c $(INCLUDE_PCAP) $(INCLUDE_OTHER)
+	$(CC) -shared -o zmqexp.so zmqexp.o
+
+tagger.so:tagger.c ../moloch.h
+	$(CC) -O2 -ggdb -Wall -Wextra -D_GNU_SOURCE -fPIC -c tagger.c $(INCLUDE_PCAP) $(INCLUDE_OTHER)
+	$(CC) -shared -o tagger.so tagger.o
+
+netflow.so:netflow.c ../moloch.h
+	$(CC) -O2 -ggdb -Wall -Wextra -D_GNU_SOURCE -fPIC -c netflow.c $(INCLUDE_PCAP) $(INCLUDE_OTHER)
+	$(CC) -shared -o netflow.so netflow.o
+
+install:
+	test -z "$(PLUGINDIR)" || $(mkdir_p) "$(PLUGINDIR)"
+	$(INSTALL) *.so $(PLUGINDIR)
+
+distclean realclean clean:
+	rm -f *.o *.so
