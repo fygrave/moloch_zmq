@@ -16,7 +16,11 @@ Only two 0MQ patterns are supported on the moment. Push/Pull and Pub/Sub.
 
 Requirements:
 ============
-0MQ 3.x or later
+0MQ 3.x or later.
+
+    add-apt-repository ppa:chris-lea/zeromq
+    apt-get update
+    apt-get install libzmq3-dev
 
 Installation:
 =============
