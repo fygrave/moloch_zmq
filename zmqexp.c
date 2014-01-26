@@ -63,10 +63,10 @@ void zmqexp_handle_complete(MolochSession_t *session, http_parser *hp) {
 
     smsg =g_string_new("");
 
-    g_string_printf(smsg,"http %s:%i\t",inet_ntoa(src), session->port1);
-    g_string_append_printf(smsg,"%s:%i\t%s\t%s",
+    g_string_printf(smsg,"http\t%s\t%i\t",inet_ntoa(src), session->port1);
+    g_string_append_printf(smsg,"%s\t%i\t%s\t%s",
                     inet_ntoa(dst), session->port2, host, url);
-    LOG("sending %s", smsg->str);
+    //LOG("sending %s", smsg->str);
 
 
     zmq_send(zsocket, smsg->str, smsg->len, 0);
